@@ -1,0 +1,16 @@
+Consider a modified version of the card game “War”.
+ 
+In this version, there are two players who are dealt 10 cards each, numbered 1 through 10. 
+In each round of the game, player A and player B play a random card from their deck.
+The player who plays the higher card takes back their own card, as well as the card of their opponent. 
+In the event of a tie, flip a coin to choose the winner at random. The game is over when one player has no cards left. 
+
+Complete the steps below:
+
+A. Write a series of functions that simulates the game and calculates the number of rounds each game takes. 
+   Run your program 10,000 times and record each result. Time how long the simulation takes. 
+
+B. Plot a histogram of the distribution of the number of rounds played. Make sure there is a title, legend, and labeled axes. 
+
+C. Re-run the program for a game with 25 distinct cards. How long did this simulation take? 
+   Does it vary linearly with respect to the 10 card game? 
