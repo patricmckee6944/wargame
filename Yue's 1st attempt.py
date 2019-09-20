@@ -15,17 +15,37 @@ Created on Thu Sep 19 18:59:58 2019
 import random
 import time
 
-start_time=time.time()
-game_list=[]
-# make a game a dictionary, not an array so you can store key vals in it
-# the better bet is to make it a class, but this will do it quick n' dirrty
-game={}
+def play_a_game(round_counts, game_list):
+    game={}
+    hands=0
 
-game_round=0
-def pk_result():
-    # name your variables more carefully
     playerOneCards=list(range(1,11))
     playerTwoCards=list(range(1,11))
+
+    while len(playerOneCards) > 0 or len(playerTwoCards) > 0:
+        # check the winner conditions
+        if len(playerOneCards) == 0:
+            game["winner"] = "PlayerTwo"
+            game["hands_played"] = hands
+            game_list.append(game)
+            round_counts.append(hands)
+            print('PlayerTwo won in this many hands:', hands)
+            return game
+
+        elif len(playerTwoCards) == 0:
+            game["winner"] = "PlayerOne"
+            game["hands_played"] = hands
+            game_list.append(game)
+
+            round_counts.append(hands)
+            print('PlayerOne won in this many hands:', hands)
+            return game
+        else:
+            # Otherwise play another hand
+            play_a_hand(playerOneCards, playerTwoCards)
+            hands += 1
+   
+def play_a_hand(playerOneCards, playerTwoCards):
     a=random.choice(playerOneCards)
     b=random.choice(playerTwoCards)
     print('PlayerA is using {}.'.format(a))
@@ -38,46 +58,37 @@ def pk_result():
         # Gotta love this fake ass coin.
         if coin == "front":
             print('PlayerA wins coin flip')
-            game["winner"] = "PlayerA"
             playerOneCards.append(a)
             playerTwoCards.remove(a)
 
         elif coin == "back":
             print('PlayerB wins coin flip')
-            game["winner"] = "PlayerB"
             playerOneCards.remove(b)
             playerTwoCards.append(b)
     
-    # PlayerA wins!
     elif a > b:
-        print('PlayerA wins')
-        game["winner"] = "PlayerA"
+        print('PlayerA wins the hand')
         playerOneCards.append(b)
         playerTwoCards.remove(b)
             
-    # PlayerB wins!
     elif a < b:
-        print('PlayberB wins')
-        game["winner"] = "PlayerB"
+        print('PlayberB wins the hand')
         playerOneCards.remove(a)
         playerTwoCards.append(a)
     print(playerOneCards)
     print(playerTwoCards)
 
-    # logic missing to play the round to completion
-    # something like check if either playerA or playerB has zero cards before declaring a winner.
-    # that should be a game() function which calls hand() until the end game case breaks out.
-
 for i in range(10): # make 10K later
-    pk_result()
-    game["round"] = i + 1
-    # even can do game time if you want
-    # Bug where PlayerB always wins?
+    start_time=time.time()
+    game_list=[]
+    # what you really just need to plot can be a List
+    # I think.. This is an easier solution.
+    round_counts=[]
+    game = play_a_game(round_counts, game_list)
     game_list.append(game)
-    print("The number of rounds is:",i)
     
 end_time=time.time()
-print(game_list)
+print("Game list:", game_list)
 print("Time takes {}.".format(end_time-start_time)) 
 
 
