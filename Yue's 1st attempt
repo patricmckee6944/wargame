@@ -1,0 +1,58 @@
+##Current work so far. We are able to play 10,000 games of 1 hand. This function does not play the contest to completion, just the first hand of the competition over and over. In addition we cannot see the tiebreaker function's result. Working on a way to use a print() to show the tiebreaker is actually working behind the scenes. A poor man's debug if you will.
+
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Sep 19 18:59:58 2019
+
+@author: 16303
+"""
+
+import random
+import time
+
+start_time=time.time()
+game_list=[]
+
+game_round=0
+def pk_result():
+    optionA=list(range(1,11))
+    optionB=list(range(1,11))
+    a=random.choice(optionA)
+    b=random.choice(optionB)
+    print('PlayerA is using {}.'.format(a))
+    print('PlayerB is using {}.'.format(b))
+
+
+    if a == b:
+        options=['front','back']
+        coin=random.choice(options)
+               
+        if coin == "front":
+            optionA.append(a)
+            optionB.remove(a)
+        elif coin == "back":
+            optionA.remove(b)
+            optionB.append(b)
+            
+    elif a > b:
+        optionA.append(b)
+        optionB.remove(b)
+            
+    elif a < b:
+        optionA.remove(a)
+        optionB.append(a)
+    print(optionA)
+    print(optionB)           
+    
+
+for i in range(10000):
+    pk_result()
+    game_round+=1
+    game_list.append(game_round)
+    print("The number of rounds is:",game_round)
+    
+end_time=time.time()
+print(game_list)
+print("Time takes {}.".format(end_time-start_time)) 
+
+
