@@ -64,7 +64,7 @@ def play_a_hand(playerOneCards, playerTwoCards):
 game_list=[]
 round_counts=[]
 
-for i in range(1000): # make 10K later
+for i in range(100): # make 10K later
     game = play_a_game(round_counts, game_list)
     game_list.append(game)
     print "Game list:", game_list
