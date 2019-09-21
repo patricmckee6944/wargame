@@ -1,0 +1,121 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Sep 21 14:17:07 2019
+
+@author: 16303
+"""
+
+##########################
+#War Game, Cards 1-10
+
+import numpy as np
+import matplotlib.pyplot as plt
+import random 
+from random import randint
+from timeit import timeit
+import time
+start_time = time.time()
+game_round_list = []
+def comparison():
+	playerOne=list(range(1,11))
+	playerTwo=list(range(1,11))
+	game_round=0
+	while playerOne and playerTwo:
+
+		a=random.choice(playerOne)
+		b=random.choice(playerTwo)
+
+		if a==b:
+			tie_breaker=random.randint(0,1)
+			if tie_breaker==1:
+				playerTwo.remove(b)
+				playerOne.append(b)
+
+			elif tie_breaker==0:
+				playerOne.remove(a)
+				playerTwo.append(a)
+
+		elif a>b:
+			playerTwo.remove(b)
+			playerOne.append(b)
+
+		elif a<b:
+			playerOne.remove(a)
+			playerTwo.append(a)
+
+		game_round+=1
+
+	game_round_list.append(game_round)
+	print('Number of Rounds:',game_round)
+
+for i in range (10000):
+	comparison()
+end_time = time.time()
+print("Total run time: {}".format(end_time - start_time))
+print(game_round_list)
+
+##########################
+#Histogram Plot of results
+import numpy as np
+import matplotlib.pyplot as plt
+plt.hist(game_round_list,bins=10)
+plt.ylabel('Times')
+plt.xlabel('Rounds')
+plt.title('WAR') 
+
+
+##########################
+#War Game, Cards 1-25
+import time
+start_time = time.time()
+
+game_round_list = []
+def comparison():
+	playerOne=list(range(1,26))
+	playerTwo=list(range(1,26))
+	game_round=0
+	while playerOne and playerTwo:
+
+		a=random.choice(playerOne)
+		b=random.choice(playerTwo)
+
+		if a==b:
+			tie_breaker=random.randint(0,1)
+			if tie_breaker==1:
+				playerTwo.remove(b)
+				playerOne.append(b)
+
+			elif tie_breaker==0:
+				playerOne.remove(a)
+				playerTwo.append(a)
+
+		elif a>b:
+			playerTwo.remove(b)
+			playerOne.append(b)
+
+		elif a<b:
+			playerOne.remove(a)
+			playerTwo.append(a)
+
+		game_round+=1
+
+	game_round_list.append(game_round)
+	print('Number of Rounds:',game_round)
+
+
+
+for i in range (10000):
+	comparison()
+
+end_time = time.time()
+print("Total run time: {}".format(end_time - start_time))
+
+print(game_round_list)
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+plt.hist(game_round_list,bins=10)
+plt.ylabel('Times')
+plt.xlabel('Rounds')
+plt.title('WAR Simulation') 
